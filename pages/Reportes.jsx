@@ -1,9 +1,9 @@
 const Reportes=()=>{
     return(
-        <section id="reports" class="content-section">
+        <section id="reports" className="content-section">
                 <h2>Generar Reportes</h2>
                 <form>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label htmlFor="report-type">Tipo de Reporte:</label>
                         <select id="report-type" required>
                             <option value="">Seleccione un reporte</option>
@@ -15,7 +15,7 @@ const Reportes=()=>{
                     <button type="submit">Generar Reporte</button>
                 </form>
                 
-                <div class="report-result">
+                <div className="report-result">
                     <h3>Resultado del Reporte</h3>
                     <p>No hay datos para mostrar.</p>
                 </div>

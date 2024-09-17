@@ -1,9 +1,9 @@
 const Inventario =()=>{
     return(
-        <section id="inventory" class="content-section">
+        <section id="inventory" className="content-section">
                 <h2>Registrar Entrada/Salida</h2>
                 <form>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label htmlFor="product-select">Producto:</label>
                         <select id="product-select" required>
                             <option value="">Seleccione un producto</option>
@@ -12,7 +12,7 @@ const Inventario =()=>{
                             <option value="producto3">Producto 3</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label htmlFor="movement-type">Tipo de Movimiento:</label>
                         <select id="movement-type" required>
                             <option value="">Seleccione el tipo</option>
@@ -20,7 +20,7 @@ const Inventario =()=>{
                             <option value="salida">Salida (Venta)</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label htmlFor="movement-quantity">Cantidad:</label>
                         <input type="number" id="movement-quantity" required/>
                     </div>
