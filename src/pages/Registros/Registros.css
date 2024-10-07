@@ -1,0 +1,63 @@
+.content_section {
+  background-color: #f7f9fc; /* Color más claro y suave */
+  padding: 40px; /* Aumentar padding para mayor espacio */
+  border-radius: 12px; /* Bordes más redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave y difusa */
+  max-width: 100%; /* Limitar el ancho */
+  margin: 0 auto; /* Centrar el contenedor */
+}
+
+h2.title {
+  font-size: 28px; /* Tamaño de fuente mayor */
+  color: #2c3e50; /* Color oscuro elegante */
+  text-align: center; /* Centrar el título */
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #2c3e50;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+
+.form-group select, 
+.form-group input {
+  padding: 12px;
+  border: 1px solid #d1d8e0;
+  border-radius: 8px; /* Bordes más redondeados */
+  font-size: 16px;
+  background-color: #ffffff; /* Fondo blanco para mejor visibilidad */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.form-group select:focus, 
+.form-group input:focus {
+  border-color: #3498db; /* Color azul moderno en foco */
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); /* Efecto de brillo sutil */
+  outline: none;
+}
+
+button[type="submit"] {
+  padding: 15px;
+  background-color: #3498db; /* Azul moderno */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}

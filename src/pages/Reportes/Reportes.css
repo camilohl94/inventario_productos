@@ -1,0 +1,90 @@
+.content-section {
+  background-color: #BDC3C7;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ajusta el ancho para que ocupe todo el espacio del contenedor */
+}
+
+.report-result {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%; /* Controla el ancho del área de resultados */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido dentro de .report-result */
+}
+
+.report-result h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2C3E50; /* Cambia el color del título para hacerlo consistente con el estilo anterior */
+}
+
+.report-result p {
+  font-size: 16px;
+  color: black;
+}
+
+form {
+  display: flex; /* Cambia grid por flex para tener mayor control sobre la alineación */
+  flex-direction: column; /* Coloca los elementos uno debajo del otro */
+  gap: 20px;
+  margin-top: 20px;
+  color: black;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  align-items: center; /* Centra los elementos del formulario */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* Ajusta el ancho de los inputs */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 4px; /* Unifica el estilo con bordes redondeados */
+  font-size: 16px;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  width: 100%; /* Ocupa el 100% del contenedor */
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border: 2px solid #5DADE2;
+}
+
+button[type="submit"] {
+  padding: 15px;
+  background-color: #5DADE2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 50%; /* Ajusta el tamaño del botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button[type="submit"]:focus {
+  outline: 2px solid #219ebc;
+  outline-offset: 2px;
+}

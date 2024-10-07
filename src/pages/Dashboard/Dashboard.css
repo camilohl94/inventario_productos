@@ -1,0 +1,92 @@
+.content-section{
+  background-color:#2482c1;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}
+.content-section.active {
+    display: block;
+  }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .card-1 {
+    background-color: green;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  .card-1:hover {
+    transform: translate(-5px);
+  }
+  
+  .card-2 {
+    background-color: blue;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-2:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-3 {
+    background-color: purple;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-3:hover {
+    transform: translateY(-5px);
+  }
+  
+  
+  .card-4 {
+    background-color: red;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-4:hover {
+    transform: translate(-5px);
+  }
+  
+  .card-info h3 {
+    font-size: 18px;
+  }
+  
+  .card-info p {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .card-icon {
+    font-size: 40px;
+  }
+  
