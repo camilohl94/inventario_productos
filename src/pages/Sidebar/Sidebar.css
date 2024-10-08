@@ -8,6 +8,15 @@
     padding: 20px;
     min-height: 100vh;
   }
+  .logo{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-radius: 100%;
+  }
   
   .sidebar-header {
     text-align: center;

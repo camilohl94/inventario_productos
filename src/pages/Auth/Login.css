@@ -38,17 +38,18 @@
 
 /* Estilos generales para los inputs */
 .login-form div {
-  gap: 10px;
-  width: 50%;
+  gap: 2px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
 }
 
 /* Estilos de las etiquetas para alinear mejor con los inputs */
 .login-form div input {
-  height: 45%;
+  height: 50%;
   width: 60%;
   outline: none;
+  border: none;
 }
 .login-form div label {
   height: 60px;

@@ -2,17 +2,18 @@ import { Link, useNavigate} from "react-router-dom";
 import './Sidebar.css'
 
 const Sidebar = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("authToken") !== null;
   const handleLogout = ()=>{
     localStorage.removeItem("authToken");
-    Navigate("/Login");
+    navigate("/Login");
 
   }
   return (
     <nav className="sidebar">
       <div className="sidebar-header">
-        <h2>Inventario</h2>
+         <h2>Inventario</h2>
+         <img src="/logo.jpeg" alt="logo_sidebar"  className="logo" />
       </div>
       <ul className="nav-links">
         <li className="nav-item">
