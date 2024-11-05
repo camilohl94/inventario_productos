@@ -16,7 +16,7 @@ const Dashboard = () => {
       setTotalProductos(productosSnapshot.size);
       
       // Calcular productos bajos en stock (ej. menos de 10 unidades)
-      const productosBajos = productosSnapshot.docs.filter(doc => doc.data().cantidad < 10);
+      const productosBajos = productosSnapshot.docs.filter(doc => doc.data().stock < 10);
       setProductosBajosStock(productosBajos.length);
     };
 
@@ -42,7 +42,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <section id="dashboard" className="content-section active">
+    <section id="dashboard" className="dashboard">
       <div className="cards">
         <div className="card-1">
           <div className="card-info">

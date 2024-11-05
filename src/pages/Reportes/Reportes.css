@@ -1,12 +1,37 @@
 .content-section {
-  background-color: #BDC3C7;
+  background-color: #f9fcfd;
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Ajusta el ancho para que ocupe todo el espacio del contenedor */
+  width: 100%; 
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  border: solid 1px black;
+  
+}
+table thead{
+  background-color: #255f96;
+  ;
+  color: white;
+}
+
+table th,td{
+  padding: 12px;
+  border: solid 1px black;
+  text-align: left;
+}
+
+button{
+  background-color: #8d9791;
+  margin-top: 20px;
+  height: 30px;
+  
 }
 
 .report-result {
@@ -15,16 +40,16 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 80%; /* Controla el ancho del área de resultados */
+  width: 90%; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido dentro de .report-result */
+  align-items: center; 
 }
 
 .report-result h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #2C3E50; /* Cambia el color del título para hacerlo consistente con el estilo anterior */
+  color: #2C3E50; 
 }
 
 .report-result p {
@@ -33,13 +58,13 @@
 }
 
 form {
-  display: flex; /* Cambia grid por flex para tener mayor control sobre la alineación */
-  flex-direction: column; /* Coloca los elementos uno debajo del otro */
+  display: flex; 
+  flex-direction: column; 
   gap: 20px;
   margin-top: 20px;
   color: black;
-  width: 100%; /* Ocupa todo el ancho disponible */
-  align-items: center; /* Centra los elementos del formulario */
+  width: 100%; 
+  align-items: center;
 }
 
 .form-group {
@@ -69,22 +94,50 @@ form {
   border: 2px solid #5DADE2;
 }
 
-button[type="submit"] {
-  padding: 15px;
-  background-color: #5DADE2;
-  color: white;
+#reporte{
+  background-color: #255f96;
+  color: #fff;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 50%; /* Ajusta el tamaño del botón */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 4px;
+  cursor: pointer; 
 }
 
-button[type="submit"]:focus {
-  outline: 2px solid #219ebc;
-  outline-offset: 2px;
+#pdf{
+  background-color: #255f96;
+  width: 120px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+
+}
+#eliminar{
+  background-color: #255f96;
+  width: 80px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+
+}
+#guardar{
+  background-color: #255f96;
+  width: 120px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+
+}
+#editar{
+  background-color: #255f96;
+  width: 80px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+
+  
+
+}
+#acciones{
+  display: flex;
+  gap: 2px;
 }

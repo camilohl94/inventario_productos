@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <section id="login" className="section">
+    <section id="login" className="login">
       <form className="login-form" onSubmit={handleLogin}>
         <div className="usuario">
           <label htmlFor="username">Usuario: </label>

@@ -13,7 +13,7 @@ const Sidebar = () => {
     <nav className="sidebar">
       <div className="sidebar-header">
          <h2>Inventario</h2>
-         <img src="/logo.jpeg" alt="logo_sidebar"  className="logo" />
+         <img src="/new_logo.jpeg" alt="logo_sidebar"  className="logo" />
       </div>
       <ul className="nav-links">
         <li className="nav-item">
@@ -31,7 +31,7 @@ const Sidebar = () => {
         <li className="nav-item">
           <Link to="Inventario">
             <i className="fas fa-exchange-alt"></i>
-            <span>Inventario</span>
+            <span>Entradas/Salidas</span>
           </Link>
         </li>
         <li className="nav-item">

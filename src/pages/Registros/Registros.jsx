@@ -6,28 +6,27 @@ import './Registros.css';
 const Registros = () => {
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [cantidad, setCantidad] = useState("");
+  const [stock, setStock] = useState("");
   const [precio, setPrecio] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de que los campos no estén vacíos
-    if (nombre && categoria && cantidad && precio) {
+    
+    if (nombre && categoria && stock && precio) {
       try {
-        // Agregar producto a Firestore
+        
         await addDoc(collection(db, "Productos"), {
           nombre,
           categoria,
-          cantidad: parseInt(cantidad),  // Convertir a número
-          precio: parseFloat(precio),    // Convertir a número flotante
-          fechaRegistro: new Date()
+          stock: parseInt(stock),  
+          precio: parseFloat(precio),    
         });
 
-        // Limpiar formulario
+        
         setNombre("");
         setCategoria("");
-        setCantidad("");
+        setStock("");
         setPrecio("");
 
         alert("Producto registrado con éxito.");
@@ -41,10 +40,10 @@ const Registros = () => {
   };
 
   return (
-    <section id="register" className="content-section">
+    <section id="register" >
       <h2>Registrar Nuevo Producto</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
+      <form onSubmit={handleSubmit} >
+        <div className="formulario_registro">
           <label htmlFor="product-name">Nombre del Producto:</label>
           <input
             type="text"
@@ -54,7 +53,7 @@ const Registros = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formulario_registro">
           <label htmlFor="category">Categoría:</label>
           <input
             type="text"
@@ -64,17 +63,17 @@ const Registros = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formulario_registro">
           <label htmlFor="quantity">Cantidad:</label>
           <input
             type="number"
             id="quantity"
-            value={cantidad}
-            onChange={(e) => setCantidad(e.target.value)}
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formulario_registro">
           <label htmlFor="price">Precio:</label>
           <input
             type="number"
@@ -85,7 +84,7 @@ const Registros = () => {
             required
           />
         </div>
-        <button type="submit">Registrar Producto</button>
+        <button type="submit" id="btn_registro">Registrar Producto</button>
       </form>
     </section>
   );
