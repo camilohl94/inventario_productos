@@ -3,6 +3,7 @@ import { getDocs, collection,deleteDoc,doc,updateDoc } from "firebase/firestore"
 import { db } from "../../Services/firebaseCofig";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import Swal from "sweetalert2";
 import "./Reportes.css";
 
 const Reportes = () => {
@@ -12,6 +13,9 @@ const Reportes = () => {
   const [loading, setLoading] = useState(false);
   const [editItem,setEditItem] = useState(null);
   const [nombreEdit,setNombreEdit]= useState('');
+  const[categoriaEdit,setCategoriaEdit]= useState('');
+  const[cantidadEdit,setCantidadEdit]= useState('');
+  const[precioEdit,setPrecioEdit]=useState('');
 
   const generarReporte = async (e) => {
     e.preventDefault();
@@ -116,17 +120,51 @@ const Reportes = () => {
   const obtenerMovimientos = async () => {
     try {
         const movimientosSnapshot = await getDocs(collection(db, "Movimientos"));
-        const movimientosList = movimientosSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-
         
-        movimientosList.sort((a, b) => {
-            return new Date(b.fecha) - new Date(a.fecha); 
-        });
+        // Obtener la fecha actual
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        
+        console.log('Fecha de hoy:', hoy.toISOString().split('T')[0]); // Para debug
 
+        const movimientosList = movimientosSnapshot.docs
+            .map((doc) => {
+                const movimiento = {
+                    id: doc.id,
+                    ...doc.data(),
+                };
+                // Log para debug
+                console.log('Fecha del movimiento:', movimiento.fecha);
+                console.log('Tipo de fecha:', typeof movimiento.fecha);
+                
+                return movimiento;
+            })
+            .filter(movimiento => {
+                // Asegurarnos de que la fecha sea un string en formato YYYY-MM-DD
+                const fechaMovimiento = new Date(movimiento.fecha);
+                const fechaMovimientoStr = fechaMovimiento.toISOString().split('T')[0];
+                const hoyStr = hoy.toISOString().split('T')[0];
+                
+                console.log('Comparando fechas:', {
+                    fechaMovimientoStr,
+                    hoyStr,
+                    sonIguales: fechaMovimientoStr === hoyStr
+                });
+                
+                return fechaMovimientoStr === hoyStr;
+            })
+            .sort((a, b) => {
+                return new Date(b.fecha) - new Date(a.fecha);
+            });
+
+        console.log('Movimientos encontrados:', movimientosList.length); // Para debug
         setResultadoReporte(movimientosList);
+
+        if (movimientosList.length === 0) {
+            setError("No hay movimientos registrados para el día de hoy");
+        } else {
+            setError(""); // Limpiar el mensaje de error si hay movimientos
+        }
     } catch (err) {
         console.error("Error al obtener movimientos", err);
         setError("Error al obtener movimientos");
@@ -151,28 +189,56 @@ const Reportes = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "Productos", id)); // Cambia "Productos" si es necesario
-      // Actualiza el estado local eliminando el producto
-      setResultadoReporte((prev) => prev.filter((item) => item.id !== id));
+      const result = await Swal.fire({
+        title: "¿Estás seguro de eliminar este producto?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+      });
+  
+      if (result.isConfirmed) {
+        await deleteDoc(doc(db, "Productos", id));
+        setResultadoReporte((prev) => prev.filter((item) => item.id !== id));
+        
+        await Swal.fire({
+          title: "¡Eliminado!",
+          text: "El producto ha sido eliminado.",
+          icon: "success"
+        });
+      }
     } catch (err) {
       console.error("Error al eliminar el producto:", err);
       setError("Error al eliminar el producto");
+      
+      
+      await Swal.fire({
+        title: "Error",
+        text: "No se pudo eliminar el producto",
+        icon: "error"
+      });
     }
   };
 
   const handleEdit = async (id) => {
-    if (nombreEdit.trim() === "") {
+    if (nombreEdit.trim() === ""&& 
+     categoriaEdit.trim()===""&&
+     cantidadEdit.trim()===""&&
+     precioEdit.trim()==="") {
       setError("El nombre no puede estar vacío");
       return;
     }
 
     try {
       // Actualiza en Firestore
-      await updateDoc(doc(db, "Productos", id), { nombre: nombreEdit }); // Cambia el campo según tu estructura
+      await updateDoc(doc(db, "Productos", id), { nombre: nombreEdit,categoria:categoriaEdit,stock:cantidadEdit,precio:precioEdit }); // Cambia el campo según tu estructura
 
       // Actualiza el estado local
       setResultadoReporte((prev) =>
-        prev.map((item) => (item.id === id ? { ...item, nombre: nombreEdit } : item))
+        prev.map((item) => (item.id === id ? { ...item, nombre: nombreEdit, categoria:categoriaEdit,stock:cantidadEdit,precio:precioEdit  } : item))
       );
 
       // Restablece el estado de edición
@@ -285,15 +351,32 @@ const Reportes = () => {
                       ) : (
                         producto.nombre
                       )}</td>
-                      <td>{producto.categoria}</td>
-                      <td>{producto.stock}</td>
-                      <td>{producto.precio}</td>
+                      <td>{editItem === producto.id?(
+                        <input 
+                        type="text"
+                        value={categoriaEdit}
+                        onChange={(e)=>setCategoriaEdit(e.target.value)}/>
+                      ):(producto.categoria)}</td>
+                      <td>
+                      {editItem === producto.id?(
+                        <input 
+                        type="text"
+                        value={cantidadEdit}
+                        onChange={(e)=>setCantidadEdit(e.target.value)}/>
+                      ):(producto.stock)}</td>
+                      <td>{editItem === producto.id?(
+                        <input 
+                        type="text"
+                        value={precioEdit}
+                        onChange={(e)=>setPrecioEdit(e.target.value)}/>
+                      ):(producto.precio)}</td>
                       <td id="acciones">
                         {editItem === producto.id ? (
                           <button id="guardar" onClick={() => handleEdit(producto.id)}>Guardar</button>
                         ) : (
                           <>
-                            <button id="editar" onClick={() => { setEditItem(producto.id); setNombreEdit(producto.nombre); }}>Editar</button>
+                            <button id="editar" onClick={() => { setEditItem(producto.id); setNombreEdit(producto.nombre);
+                              setCantidadEdit(producto.stock),setCategoriaEdit(producto.categoria),setPrecioEdit(producto.precio) }}>Editar</button>
                             <button id="eliminar" onClick={() => handleDelete(producto.id)}>Eliminar</button>
                           </>
                         )}

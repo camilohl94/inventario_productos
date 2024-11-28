@@ -17,14 +17,17 @@ table{
 }
 table thead{
   background-color: #255f96;
-  ;
   color: white;
 }
 
 table th,td{
-  padding: 12px;
+  padding: 2px;
   border: solid 1px black;
-  text-align: left;
+  text-align: center;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+
 }
 
 button{
@@ -97,47 +100,84 @@ form {
 #reporte{
   background-color: #255f96;
   color: #fff;
-  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer; 
+}
+#reporte:hover{
+  background-color: #103f6b;
 }
 
 #pdf{
-  background-color: #255f96;
+  background-color: #2a4e728f;
   width: 120px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
   color: white;
 
 }
+#pdf:hover{
+  background-color: #3b4a588f;
+   cursor: pointer;
+}
 #eliminar{
-  background-color: #255f96;
+  background-color: #be0303fa;
   width: 80px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: none;
   color: white;
 
+}
+#eliminar:hover{
+  background-color: #920303fd;
+  cursor: pointer;
 }
 #guardar{
   background-color: #255f96;
   width: 120px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: none;
   color: white;
-
+}
+#guardar:hover{
+  background-color: #123e68;
+  cursor: pointer;
 }
 #editar{
   background-color: #255f96;
   width: 80px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: none;
   color: white;
-
-  
-
+}
+#editar:hover{
+  background-color: #0d3458;
+  cursor: pointer;
 }
 #acciones{
   display: flex;
-  gap: 2px;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+
+#acciones button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px; 
+  min-width: 80px;
+  height: 30px; 
+}
+td#acciones {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 5px; 
+}
+table td {
+  height: 100%; 
+  vertical-align: middle; 
 }

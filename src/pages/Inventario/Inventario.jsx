@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getDocs, collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../Services/firebaseCofig"; 
-import { onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
 import './Inventario.css';
 
 const Inventario = () => {
@@ -58,17 +58,28 @@ const Inventario = () => {
 
         
         if (nuevoStock < 0 && tipoMovimiento === "Salida") {
-          setError("No hay suficiente stock para realizar esta salida.");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No hay suficiente stock para realizar esta salida.",
+          });
           return;
         }
 
         
         await updateDoc(productoRef, { stock: nuevoStock });
 
-       
+        const obtenerFechaLocal = () => {
+          const hoy = new Date();
+          const anio = hoy.getFullYear();
+          const mes = String(hoy.getMonth() + 1).padStart(2, '0'); 
+          const dia = String(hoy.getDate()).padStart(2, '0');
+          return `${anio}-${mes}-${dia}`;
+        };
+        
         await addDoc(collection(db, "Movimientos"), {
           cantidad: movimientoCantidad,
-          fecha: new Date().toISOString().split('T')[0], 
+          fecha: obtenerFechaLocal(), 
           producto: productoData.nombre,
           responsable: responsable || "Usuario desconocido",
           tipo: tipoMovimiento,
@@ -79,9 +90,17 @@ const Inventario = () => {
         setProductoSeleccionado('');
         setTipoMovimiento('');
         setCantidad('');
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Movimiento registrado",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     } catch (err) {
       console.error("Error al registrar movimiento", err);
+      
       setError("Error al registrar el movimiento");
     }
   };

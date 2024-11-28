@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../Services/firebaseCofig";
 import './Dashboard.css';
 
@@ -10,31 +10,66 @@ const Dashboard = () => {
   const [productosBajosStock, setProductosBajosStock] = useState(0);
 
   useEffect(() => {
-    // Obtener total de productos
     const fetchTotalProductos = async () => {
-      const productosSnapshot = await getDocs(collection(db, "Productos"));
-      setTotalProductos(productosSnapshot.size);
-      
-      // Calcular productos bajos en stock (ej. menos de 10 unidades)
-      const productosBajos = productosSnapshot.docs.filter(doc => doc.data().stock < 10);
-      setProductosBajosStock(productosBajos.length);
+      try {
+        const productosSnapshot = await getDocs(collection(db, "Productos"));
+        setTotalProductos(productosSnapshot.size);
+
+        const productosBajos = productosSnapshot.docs.filter(
+          doc => doc.data().stock < 10
+        );
+        setProductosBajosStock(productosBajos.length);
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+      }
     };
 
-    // Obtener entradas y salidas de hoy
+    const obtenerFechaLocal = () => {
+      const hoy = new Date();
+      const anio = hoy.getFullYear();
+      const mes = String(hoy.getMonth() + 1).padStart(2, '0'); 
+      const dia = String(hoy.getDate()).padStart(2, '0');
+      return `${anio}-${mes}-${dia}`;
+    };
+
     const fetchMovimientosHoy = async () => {
-      const today = new Date();
-      const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      try {
+        const todayString = obtenerFechaLocal();
+        console.log("Fecha de hoy:", todayString);
 
-      const movimientosSnapshot = await getDocs(
-        query(collection(db, "Movimientos"), where("fecha", ">=", startOfDay))
-      );
+        const movimientosSnapshot = await getDocs(collection(db, "Movimientos"));
+        
+        // Filtrar y contar movimientos
+        let entradas = 0;
+        let salidas = 0;
 
-      // Calcular entradas y salidas
-      const entradas = movimientosSnapshot.docs.filter(doc => doc.data().tipo === "entrada");
-      const salidas = movimientosSnapshot.docs.filter(doc => doc.data().tipo === "salida");
+        movimientosSnapshot.docs.forEach(doc => {
+          const data = doc.data();
+          
+          if (data.fecha === todayString) {
+            if (data.tipo === "Entrada") {
+              entradas++;
+            } else if (data.tipo === "Salida") {
+              salidas++;
+            }
+          }
+        });
 
-      setEntradasHoy(entradas.length);
-      setSalidasHoy(salidas.length);
+     
+        setEntradasHoy(entradas);
+        setSalidasHoy(salidas);
+
+        
+        console.log({
+          fechaBuscada: todayString,
+          totalMovimientos: movimientosSnapshot.size,
+          entradasContadas: entradas,
+          salidasContadas: salidas
+        });
+
+      } catch (error) {
+        console.error("Error al obtener movimientos:", error);
+      }
     };
 
     fetchTotalProductos();

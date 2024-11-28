@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Services/firebaseCofig";
+import Swal from "sweetalert2";
 import './Registros.css';
 
 const Registros = () => {
@@ -28,11 +29,21 @@ const Registros = () => {
         setCategoria("");
         setStock("");
         setPrecio("");
-
-        alert("Producto registrado con éxito.");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Producto registrado con éxito.",
+          showConfirmButton: false,
+          timer: 2000
+        });
       } catch (error) {
         console.error("Error al registrar el producto:", error);
         alert("Error al registrar el producto.");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error al registrar el producto.",
+        });
       }
     } else {
       alert("Por favor, complete todos los campos.");
