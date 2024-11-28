@@ -21,7 +21,7 @@ table thead{
 }
 
 table th,td{
-  padding: 2px;
+  padding: 4px;
   border: solid 1px black;
   text-align: center;
   vertical-align: middle;
@@ -126,6 +126,7 @@ form {
   border-radius: 8px;
   border: none;
   color: white;
+  margin-top: 2px;
 
 }
 #eliminar:hover{
@@ -138,6 +139,7 @@ form {
   border-radius: 8px;
   border: none;
   color: white;
+  margin-top: 2px;
 }
 #guardar:hover{
   background-color: #123e68;
@@ -149,6 +151,7 @@ form {
   border-radius: 8px;
   border: none;
   color: white;
+  margin-top: 2px;
 }
 #editar:hover{
   background-color: #0d3458;
